@@ -1,0 +1,197 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+/* ROOT VARIABLES */
+:root {
+  --bg-color: #030303;
+  --text-main: #ffffff;
+  --text-muted: #a1a1aa;
+  --accent-blue: #3b82f6;
+  --accent-cyan: #00f2fe;
+  --accent-purple: #9b51e0;
+  --glass-bg: rgba(20, 20, 25, 0.4);
+  --glass-border: rgba(255, 255, 255, 0.08);
+}
+
+/* GLOBAL */
+html {
+  scroll-behavior: smooth;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  overflow-y: auto; /* ✅ FIXED SCROLL */
+  background-color: var(--bg-color);
+}
+
+/* ================= BACKGROUND ================= */
+
+/* ❌ REMOVED old .bg-grid (conflict) */
+
+/* GLOW EFFECT */
+.bg-glows {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.bg-glows::before,
+.bg-glows::after {
+  content: '';
+  position: absolute;
+  width: 60vh;
+  height: 60vh;
+  border-radius: 50%;
+  filter: blur(140px);
+  opacity: 0.12;
+}
+
+.bg-glows::before {
+  background: var(--accent-blue);
+  top: 0%;
+  left: -15%;
+}
+
+.bg-glows::after {
+  background: var(--accent-purple);
+  bottom: -10%;
+  right: -15%;
+}
+
+/* ✅ FINAL GRID (YOUR CUSTOM ONE) */
+.grid-bg {
+  position: fixed;
+  inset: 0;
+
+  transform: skewX(-25deg) skewY(10deg);
+  /* transform: skewY(18deg); */
+
+
+  background-image:
+    linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px);
+
+  background-size: 75px 75px;
+
+  mask-image: radial-gradient(circle at center,
+                rgba(255,255,255,0.8) 40%,
+                rgba(255,255,255,0.3) 65%,
+                transparent 90%);
+
+  -webkit-mask-image: radial-gradient(circle at center,
+                rgba(255,255,255,0.8) 40%,
+                rgba(255,255,255,0.3) 65%,
+                transparent 90%);
+
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ================= BUTTONS ================= */
+
+.btn-gradient {
+  background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+  color: white;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.btn-gradient:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(155, 81, 224, 0.3);
+}
+
+.btn-primary {
+  background: white;
+  color: black;
+  font-weight: 600;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+.btn-primary:hover {
+  background: #f0f0f0;
+  transform: translateY(-2px);
+}
+
+/* ================= GLASS ================= */
+
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.glass-card {
+  transition: transform 0.3s ease-in-out, border-color 0.3s ease;
+}
+.glass-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* ================= TEXT ================= */
+
+.text-gradient {
+  background: linear-gradient(90deg, #ffffff, #a1a1aa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-purple {
+  background: linear-gradient(90deg, var(--accent-cyan), var(--accent-blue));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ================= ANIMATIONS ================= */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+}
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ================= LOADER ================= */
+
+.loader-container {
+  position: fixed;
+  inset: 0;
+  background: var(--bg-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  transition: opacity 0.5s ease;
+}
+.loader-container.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loader {
+  width: 50px;
+  height: 50px;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ================= SECTIONS ================= */
+
+section {
+  padding-top: 120px;
+}
