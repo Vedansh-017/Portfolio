@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 // await connectDB()
 const allowedOrigins = [
     'http://localhost:5173', // React app
-
+    'https://portfolio-tau-ten-10.vercel.app'
 ];
 app.use(cors({
     origin: allowedOrigins,

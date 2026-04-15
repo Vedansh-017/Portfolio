@@ -1,17 +1,6 @@
 import { google } from "googleapis";
-import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-// Load your service account credentials
-const credentials = JSON.parse(
-  fs.readFileSync(path.join(__dirname, "../credentails.json"), "utf8")
-);
-
-const { client_email, private_key } = credentials;
+const client_email = process.env.GOOGLE_CLIENT_EMAIL;
+const private_key = process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n');
 
 // ✅ Create a modern JWT auth client (recommended method)
 const auth = new google.auth.JWT({
@@ -33,7 +22,7 @@ export const sendFeedback = async (req, res) => {
       });
     }
 
-    const SPREADSHEET_ID = "11OVZ0iRiia5t4_uasgR_ZE6Nq1Wqz9Idiby_eKjJsus";
+    const SPREADSHEET_ID = process.env.GOOGLE_SHEET_ID;
     const RANGE = "Sheet1!A:D";
 
     await sheets.spreadsheets.values.append({
